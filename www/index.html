@@ -23,18 +23,37 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
+    
+     <div data-role="page" data-theme="b">
+<div data-role="header">
+    <h1>PrijsPlanner App</h1>
+    <a href="#" data-icon="gear" class="ui-btn-right">Options</a>
+</div>
 
-                <p>
-    <button id="startScan">Start Scan</button>
-    </p>
-
-    <div id="results"></div>
+  <div data-role="main" class="ui-content">
+   <a href="#" class="ui-btn-active ui-state-persist" id="startScan" data-role="button" data-iconpos="left"  data-icon="check">Scan Barcode</a>
+  
+         <div id="results"></div>
         </div>
+  </div>
+
+<div data-role="footer" data-id="foo1" data-position="fixed">
+	<div data-role="navbar" data-iconpos="top">
+		<ul>
+			<li><a href="index.html" class="ui-btn-active ui-state-persist" data-icon="home">Home</a></li>
+			<li><a href="b.html"data-icon="search">Zoeken</a></li>
+			<li><a href="d.html" data-icon="info">Info</a></li>
+		</ul>
+	</div><!-- /navbar -->
+</div><!-- /footer -->
+</div> 
+ 
+        <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
