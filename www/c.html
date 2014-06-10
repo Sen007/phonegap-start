@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/prijs.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+
+        <title>PrijsPlanner.nl</title>
+    </head>
+    <body>
+    
+     <div data-role="page" data-theme="b">
+<div data-role="header">
+    <h1>PrijsPlanner App</h1>
+    <a href="#" data-icon="gear" class="ui-btn-right">Options</a>
+</div>
+
+  <div data-role="main" class="ui-content">
+<label for="search-basic">Search Input:</label>
+<input type="search" name="search" id="search-basic" value="" />
+
+<h2>Serving Data from External Server</h2>
+ <form action="" method="GET" id="zoeken">
+ <select name="users" onchange="showUser(this.value)">
+ <option value="">Select power type</option>
+ <option value="electric">Electric</option>
+ <option value="nitro">Nitro</option>
+ </select>
+ <br><input type="button" id="button" class="buttonClass" value="GO" onSubmit="return showUser(this.form)">
+ </form>
+ <br>
+ <div id="txtHint">(Data will be displayed here)</div>
+
+<script>
+// --------------------------- CORS begin
+// Create the XHR object.
+function createCORSRequest(method, url) {
+ var xhr = new XMLHttpRequest();
+ if ("withCredentials" in xhr) {
+// XHR for Chrome/Firefox/Opera/Safari.
+ xhr.open(method, url, true);
+ console.log('withCredentials');
+ } else if (typeof XDomainRequest != "undefined") {
+// XDomainRequest for IE.
+ xhr = new XDomainRequest();
+ xhr.open(method, url);
+ } else {
+// CORS not supported.
+ xhr = null;
+ }
+ return xhr;
+}
+function makeCorsRequest() {
+ var xhr = createCORSRequest('GET', url);
+ if (!xhr) {
+ alert('CORS not supported');
+ return;
+ }
+ xhr.onload = function() {
+ console.log("onload begin");
+ }
+xhr.onerror = function() {
+ alert('Error accessing database.');
+ };
+ xhr.send();
+}
+// --------------------------- CORS end
+function showUser(str) {
+ if (str=="") {
+ document.getElementById("txtHint").innerHTML = "Please make a selection.";
+ return;
+ } 
+ document.getElementById("txtHint").innerHTML = "Getting data ...";
+ 
+ xmlhttp.onreadystatechange=function() {
+ if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+ var txt = xmlhttp.responseText;
+ document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+ }
+ }
+// Need full URL to page, since this HTML page is not on a server
+ xmlhttp.open("GET","http://www.MYDOMAIN.com/getcars.php?q="+str,true);
+ xmlhttp.send();
+ }
+// Start the CORS on startup
+var url = "http://www.MYDOMAIN.com/";
+var method = "GET";
+createCORSRequest(method, url);
+ </script>
+
+        </div>
+
+
+<div data-role="footer" data-id="foo1" data-position="fixed">
+	<div data-role="navbar" data-iconpos="top">
+		<ul>
+			<li><a href="index.html" class="ui-btn-active ui-state-persist" data-icon="home">Home</a></li>
+			<li><a href="b.html"data-icon="search">Zoeken</a></li>
+			<li><a href="d.html" data-icon="info">Info</a></li>
+		</ul>
+	</div><!-- /navbar -->
+</div><!-- /footer -->
+</div> 
+ 
+        <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
